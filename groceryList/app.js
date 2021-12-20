@@ -21,7 +21,7 @@ form.addEventListener('submit', addItem);
 clearBtn.addEventListener('click', clearItems);
 
 //load items
-window.addEventListener('DOMContentLoaded', setupItems)
+window.addEventListener('DOMContentLoaded', setupItems);
 
 //FUNCTIONS
 function addItem(e) {
@@ -29,7 +29,7 @@ function addItem(e) {
     const value = grocery.value;
     const id = new Date().getTime().toString();
     if (value && !editFlag) {
-        createListItem(id, value)
+        createListItem(id, value);
 
         //display alert
         displayAlert('item added to list', 'success');
@@ -50,9 +50,9 @@ function addItem(e) {
         //edit local storage
         editLocalStorage(editID, value);
         setBackToDefault();
+
     } else {
         displayAlert('please enter value', 'danger');
-
     }
 }
 
@@ -67,8 +67,6 @@ function displayAlert(text, action) {
         alert.classList.remove(`alert-${action}`);
     }, 2000);
 }
-
-
 
 //clear items
 function clearItems() {
@@ -97,6 +95,7 @@ function deleteItem(e) {
     //remove from local storage
     removeFromLocalStorage(id);
 }
+
 //edit function
 function editItem(e) {
     const element = e.currentTarget.parentElement.parentElement;
@@ -121,7 +120,6 @@ function setBackToDefault() {
 function addToLocalStorage(id, value) {
     const groceryItem = { id, value }
     let items = getLocalStorage();
-
     items.push(groceryItem);
     localStorage.setItem('list', JSON.stringify(items));
 }
@@ -157,7 +155,7 @@ function setupItems() {
     let items = getLocalStorage();
     if (items.length > 0) {
         items.forEach(function(item) {
-            createListItem(item.id, item.value)
+            createListItem(item.id, item.value);
         });
         container.classList.add('show-container');
     }
