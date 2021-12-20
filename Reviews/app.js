@@ -1,12 +1,9 @@
-//images taken from https://github.com/john-smilga/javascript-basic-projects/blob/master/03-reviews/final/app.js
-
 //local reviews 
-const reviews = [
-    {
+const reviews = [{
         id: 1,
         name: 'Susan Smith',
         job: 'Front End Developer',
-        img:  'https://res.cloudinary.com/diqqf3eq2/image/upload/v1586883334/person-1_rfzshl.jpg',
+        img: 'https://res.cloudinary.com/diqqf3eq2/image/upload/v1586883334/person-1_rfzshl.jpg',
         text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos voluptatibus temporibus ipsa debitis explicabo id? Excepturi ducimus vel nihil commodi.'
     },
     {
@@ -17,11 +14,11 @@ const reviews = [
         text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique iure cum delectus quia, exercitationem impedit quibusdam illo non fugiat nam!'
     },
     {
-      id: 3,
-      name: 'Peter Peterson',
-      job: 'QA Analyst',
-      img: 'https://res.cloudinary.com/diqqf3eq2/image/upload/v1586883417/person-3_ipa0mj.jpg',
-      text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas nemo culpa ipsum. Et expedita tempore unde magni saepe.'
+        id: 3,
+        name: 'Peter Peterson',
+        job: 'QA Analyst',
+        img: 'https://res.cloudinary.com/diqqf3eq2/image/upload/v1586883417/person-3_ipa0mj.jpg',
+        text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas nemo culpa ipsum. Et expedita tempore unde magni saepe.'
     },
     {
         id: 4,
@@ -52,7 +49,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 // show person based on item
 
-function showPerson(){
+function showPerson() {
     const item = reviews[currentItem];
     img.src = item.img;
     author.textContent = item.name;
@@ -61,26 +58,26 @@ function showPerson(){
 }
 
 //show next person
-nextBtn.addEventListener('click', function(){
+nextBtn.addEventListener('click', function() {
     currentItem++;
-    if(currentItem > reviews.length-1){
+    if (currentItem > reviews.length - 1) {
         currentItem = 0;
     };
     showPerson(currentItem);
 });
 
 //show previous person
-prevBtn.addEventListener('click', function () {
+prevBtn.addEventListener('click', function() {
     currentItem--;
-    if(currentItem < 0){
-        currentItem = reviews.length -1;
+    if (currentItem < 0) {
+        currentItem = reviews.length - 1;
     }
     showPerson(currentItem);
 });
 
 //select random person
-randomBtn.addEventListener('click', function () {
-    const randomNumber = Math.floor(Math.random()* reviews.length);
+randomBtn.addEventListener('click', function() {
+    const randomNumber = Math.floor(Math.random() * reviews.length);
     currentItem = randomNumber;
     showPerson(currentItem);
 });
