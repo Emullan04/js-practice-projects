@@ -1,0 +1,47 @@
+
+html {
+    margin: 0%;
+    padding: 0%;
+}
+body {
+    font-family: 'Bookman Old Style', Times, serif;
+    color: black;
+}
+nav {
+    margin: 50px;
+    width: 90%;
+    padding: 1%;
+    border-radius: 9%;
+    background-color: white;
+    font-weight: 500;
+}
+
+li {
+    display: inline;
+    text-decoration: none;
+    list-style-type: none;
+}
+
+li a {
+    color: rgba(16, 77, 77, 0.829);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.container {
+    border-radius: 12%;;
+    border: white;
+    display: flexbox;
+    background-color: transparent;
+}
+
+button {
+    width: 50%;
+    color: black;
+    background-color: transparent;
+    border: 1 px solid black;
+    border-radius: 15px;
+    padding: 1%;
+    cursor: pointer;
+    box-shadow:0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)
+}
