@@ -119,7 +119,7 @@ function displayMenuButtons() {
         if (!values.includes(item.category)) {
             values.push(item.category);
         }
-        return values
+        return values;
     }, ['all']);
     const categoryBtns = categories.map(function(category) {
         return `<button class="filter-btn" type="button" data-id=${category}>${category}</button>`
@@ -133,13 +133,13 @@ function displayMenuButtons() {
             const menuCategory = menu.filter(function(menuItem) {
                 if (menuItem.category === category) {
                     return menuItem;
-                };
+                }
             });
             if (category === 'all') {
                 displayMenuItems(menu);
             } else {
                 displayMenuItems(menuCategory);
-            };
+            }
         });
-    })
+    });
 }
