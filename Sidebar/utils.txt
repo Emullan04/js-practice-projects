@@ -1,0 +1,44 @@
+<--! links -->
+    <ul class ="links">
+        <li>
+            <a href="index.html">Home</a>
+        </li>
+        <li>
+            <a href="about.html">About</a>
+        </li>
+        <li>
+            <a href="projects.html">Projects</a>
+        </li>
+        <li>
+            <a href="contact.html">Contact</a>
+        </li>
+    </ul>
+    
+<!-- social media -->
+    <ul class="social-media">
+        <li>
+            <a href="https://www.twitter.com">
+            <i class="fab fa-facebook"></i>   
+            </a>
+        </li>
+        <li>
+            <a href="https://www.twitter.com">
+            <i class="fab fa-twitter"></i>   
+            </a>
+        </li>
+        <li>
+            <a href="https://www.twitter.com">
+            <i class="fab fa-behance"></i>   
+            </a>
+        </li>
+        <li>
+            <a href="https://www.twitter.com">
+            <i class="fab fa-linkedin"></i>   
+            </a>
+        </li>
+        <li>
+            <a href="https://www.twitter.com">
+            <i class="fab fa-sketch"></i>   
+            </a>
+        </li>
+    </ul>
