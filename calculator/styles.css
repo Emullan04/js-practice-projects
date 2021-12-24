@@ -1,0 +1,113 @@
+/* fonts */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    font-family: "Roboto mono", monospace;
+    color: black;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    background-color: #fff;
+    background: linear-gradient( to right, #ffe5b4, #fff, #add8e6);
+    display: grid;
+    place-content: center;
+}
+
+.container {
+    width: 90vw;
+    max-width: 500px;
+    background-color: #cecece;
+    display: grid;
+    gap: 1px;
+    grid-template-areas: "header header header header" "display display display display";
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: 20px minmax(120px, auto) repeat(5, minmax(0, 70px));
+}
+
+.container:focus-within {
+    background-color: rgba(225, 225, 225, 0.5);
+}
+
+.header {
+    grid-area: header;
+    padding: 0.25rem, .5rem;
+    display: flexbox;
+    align-items: center;
+}
+
+.header>h1 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: .85rem;
+    font-weight: 500;
+}
+
+.display {
+    grid-area: display;
+    padding: 3px 5px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.previous-value {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.current-value {
+    font-size: 3rem;
+    font-weight: bolder;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    text-align: right;
+    font-family: "roboto mono", "monospace";
+}
+
+button {
+    display: grid;
+    place-content: center;
+    font-size: 1.5rem;
+    padding: .5rem;
+    background-color: whitesmoke;
+    border: none;
+    outline: none;
+}
+
+button:hover,
+button:active {
+    background-color: rgba(255, 255, 255, .2);
+}
+
+.function {
+    background-color: rgb(235, 235, 235);
+}
+
+.equals {
+    background-color: rgb(108, 177, 233, );
+}
+
+.equals:hover,
+.equals:active {
+    background-color: steelblue;
+    filter: brightness(120%);
+}
+
+@media screen and (min-width: 768px) {
+    html {
+        font-size: 22px;
+    }
+    .container {
+        grid-template-rows: 35px minmax(95px, auto), repeat(5, minmax(0, 95px));
+    }
+}
