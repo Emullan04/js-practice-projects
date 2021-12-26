@@ -9,26 +9,20 @@ const initApp = () => {
     const inputButtons = document.querySelectorAll('.number');
     inputButtons.forEach(button => {
         button.addEventListener('click', (e) => {
-            const newInput = e.target.textContent;
+
+            const newInput = button.textContent;
             if (newNumberFlag) {
-                currentValueElement.value = newInput;
+                currentValueElement.value = newInput === '.' ? '0.' : newInput;
                 newNumberFlag = false;
+            } else if (currentValueElement.value.includes('.') && newInput === '.') {
+                return;
             } else {
                 currentValueElement.value =
-                    currentValueElement.value == 0 ? newInput : `${currentValueElement.value}${newInput}`;
+                    currentValueElement.value == 0 && currentValueElement.value.length == 1 && newInput !== '.' ? newInput : `${currentValueElement.value}${newInput}`;
             }
-        })
+        });
     });
-    const clearButtons = document.querySelectorAll('.clear, .clear-entry');
-    clearButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            currentValueElement.value = 0;
-            if (e.target.classList.contains('clear')) {
-                previousValueElement.textContent = '';
-                itemArray = [];
-            }
-        })
-    });
+
 
     const opButtons = document.querySelectorAll('.operator');
     opButtons.forEach(button => {
@@ -39,32 +33,38 @@ const initApp = () => {
                 itemArray = [];
             }
             const newOperator = e.target.textContent;
-            //is a number been selected? 
-            if (!itemArray.length && currentValueElement.value == 0) return;
+            let currentVal = parseFloat(currentValueElement.value);
+
+            //has number been selected? 
+            if (!itemArray.length && currentVal == 0) return;
 
             //begin new equation
             if (!itemArray.length) {
-                itemArray.push(currentValueElement.value, newOperator);
-                previousValueElement.textContent = `${currentValueElement.value}${newOperator}`;
+                itemArray.push(currentVal, newOperator);
+                previousValueElement.textContent = `${currentVal}${newOperator}`;
                 return newNumberFlag = true;
             }
+
+            //complete equation    
             if (itemArray.length) {
-                itemArray.push(currentValueElement.value);
+                itemArray.push(currentVal);
 
                 const equationObject = {
-                    number1: parseFloat(itemArray[0]),
-                    number2: parseFloat(currentValueElement.value),
+                    firstNum: parseFloat(itemArray[0]),
+                    secondNum: parseFloat(currentVal),
                     operator: itemArray[1],
                 }
+                equationArray.push(equationObject);
 
                 const equationString =
-                    `${equationObject[number1]}
-                ${equationObject[operator]}
-                ${equationObject[number2]}`
+                    `${equationObject['firstNum']}
+                ${equationObject['operator']}
+                ${equationObject['secondNum']}`
 
-                const newValue = calculate(equationString, currentValueElement.value);
+                const newValue = calculate(equationString, currentValueElement);
 
-                previousValueElement.textContent = `${newValue}${newOperator}`;
+                previousValueElement.textContent =
+                    `${newValue} ${newOperator}`;
 
                 //start new equation
                 itemArray = [newValue, newOperator];
@@ -72,7 +72,56 @@ const initApp = () => {
                 console.log(equationArray);
             }
         });
-    })
+    });
+    const equalsButton = document.querySelector('.equals');
+    equalsButton.addEventListener('click', () => {
+        const currentVal = currentValueElement.value;
+        let equationObj;
+
+        // pressing equals repeatedly
+        if (!itemArray.length && equationArray.length) {
+            const lastEquation = equationArray[equationArray.length - 1];
+            equationObj = {
+                firstNum: parseFloat(currentVal),
+                secondNum: lastEquation.secondNum,
+                operator: lastEquation.operator,
+            }
+        } else if (!itemArray.length) {
+            return currentVal;
+        } else {
+            itemArray.push(currentVal);
+            equationObj = {
+                firstNum: parseFloat(itemArray[0]),
+                secondNum: parseFloat(currentVal),
+                operator: itemArray[1],
+            }
+        }
+
+        equationArray.push(equationObj)
+        const equationString = `${equationObj['firstNum']} ${equationObj['operator']} ${equationObj['secondNum']}`;
+
+        calculate(equationString, currentValueElement);
+
+        previousValueElement.textContent = `${equationString} = `;
+        newNumberFlag = true;
+        itemArray = [];
+        console.log(equationArray);
+    });
+
+    const clearButtons = document.querySelectorAll('.clear, .clear-entry');
+    clearButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            currentValueElement.value = '0';
+            previousValueElement.textContent = '';
+            if (e.target.classList.contains('clear')) {
+                itemArray = [];
+                equationArray = [];
+            }
+
+            console.log(currentValueElement.value);
+            console.log(`prev value ${previousValueElement.textContent}`);
+        });
+    });
     const deleteButton = document.querySelector('.delete');
     deleteButton.addEventListener('click', () => {
         currentValueElement.value = currentValueElement.value.slice(0, -1);
@@ -81,7 +130,6 @@ const initApp = () => {
     const signChange = document.querySelector('.sign-change');
     signChange.addEventListener('click', () => {
         currentValueElement.value = parseFloat(currentValueElement.value) * -1;
-
     });
 }
 
